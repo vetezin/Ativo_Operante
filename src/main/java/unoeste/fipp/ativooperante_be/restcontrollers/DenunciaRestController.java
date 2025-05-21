@@ -1,5 +1,6 @@
 package unoeste.fipp.ativooperante_be.restcontrollers;
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ public class DenunciaRestController {
             return ResponseEntity.badRequest().body(
                     new Erro("Nenhum tipo cadastrado"));
     }
+
 
     @PostMapping
     public ResponseEntity<Object> save(@RequestBody Denuncia denuncia){
@@ -66,6 +68,18 @@ public class DenunciaRestController {
                     new Erro("Nenhuma denuncia cadastrada para esse usuário"));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getById(@PathVariable Long id){
+
+        Denuncia denuncia;
+        denuncia = denunciaService.getDenunciaById(id);
+
+        if(denuncia != null)
+            return ResponseEntity.ok(denuncia);
+        return ResponseEntity.badRequest().body(new Erro("Nenhuma denuncia cadastrada"));
+
+    }
+
 
     @DeleteMapping("apagar/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable Long id){
@@ -78,6 +92,15 @@ public class DenunciaRestController {
             return ResponseEntity.badRequest().body(new Erro("Denuncia nao encontrada"));
 
 
+    }
+    @PutMapping
+    public ResponseEntity<Object> update(@RequestBody Denuncia denuncia){
+
+        Denuncia denAtt = denunciaService.update(denuncia);
+
+        if(denAtt != null)
+            return ResponseEntity.ok(denAtt);
+        return ResponseEntity.badRequest().body(new Erro("Não foi possivel atualizar denuncia: "+denuncia.getId()));
     }
 
 }

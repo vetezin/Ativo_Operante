@@ -32,6 +32,10 @@ public class DenunciaService {
         return denunciaRepository.findAllByUsuario(new Usuario(id,0L));
     }
 
+    public Denuncia getDenunciaById(Long id) {
+        return denunciaRepository.findById(id).get();
+    }
+
 
     public Denuncia salvar(Denuncia denuncia) {
 
@@ -50,5 +54,19 @@ public class DenunciaService {
         }
         return false;
 
+    }
+
+
+    public Denuncia update(Denuncia denuncia) {
+
+        long id = denuncia.getId();
+        if(denunciaRepository.existsById(id)){
+            Denuncia attDen = denunciaRepository.findById(id).get();
+            if(attDen != null){
+                attDen.setTexto(denuncia.getTexto());
+                return denunciaRepository.save(attDen);
+            }
+        }
+        return null;
     }
 }

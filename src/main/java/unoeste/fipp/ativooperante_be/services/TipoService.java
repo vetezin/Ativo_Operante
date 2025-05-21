@@ -11,10 +11,13 @@ import java.util.List;
 public class TipoService {
     @Autowired
     private TipoRepository tipoRepository;
+
+
     public List<Tipo> getAll()
     {
         return tipoRepository.findAll();
     }
+
     public Tipo salvar(Tipo tipo){
         return tipoRepository.save(tipo);
     }
@@ -33,10 +36,6 @@ public class TipoService {
         }
         return null;
     }
-
-
-
-
     public Tipo deletar(Tipo tipo, Long id){
 
         if(tipoRepository.existsById(id)){
@@ -44,6 +43,10 @@ public class TipoService {
              return tipo;
         }
         else return null;
+    }
+
+    public Tipo buscarPorId(Long id) {
+        return tipoRepository.findById(id).orElse(null);
     }
 
 }

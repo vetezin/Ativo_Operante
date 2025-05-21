@@ -15,6 +15,7 @@ import java.util.List;
 public class TipoRestController {
     @Autowired
     private TipoService tipoService;
+
     @GetMapping
     public ResponseEntity<Object> getAll(){
         List<Tipo> tipoList;
@@ -25,6 +26,18 @@ public class TipoRestController {
             return ResponseEntity.badRequest().body(
                     new Erro("Nenhum tipo cadastrado"));
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getById(@PathVariable long id){
+        Tipo tipo;
+
+        tipo= tipoService.buscarPorId(id);
+
+        if(tipo!=null)
+            return ResponseEntity.ok(tipo);
+        else
+            return ResponseEntity.badRequest().body(new Erro("Nenhum tipo de id: "+ id+" cadastrado"));
+    }
+
     @PostMapping
     public ResponseEntity<Object> save(@RequestBody Tipo tipo){
         Tipo tipoAux=tipoService.salvar(tipo);

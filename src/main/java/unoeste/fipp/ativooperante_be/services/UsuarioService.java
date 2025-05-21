@@ -10,12 +10,8 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-
     public Usuario addUser(Usuario usuario) {
-
-
         return usuarioRepository.save(usuario);
-
 
     }
 }

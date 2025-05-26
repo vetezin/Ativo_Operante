@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualizar Denúncia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Detalhes da Denúncia</h1>
+
+        <div id="detalhesDenuncia">
+            <!-- Campos da denúncia serão preenchidos aqui -->
+            <p><strong>ID:</strong> <span id="denunciaId"></span></p>
+            <p><strong>Título:</strong> <span id="denunciaTitulo"></span></p>
+            <p><strong>Descrição:</strong> <span id="denunciaDescricao"></span></p>
+            <p><strong>Data:</strong> <span id="denunciaData"></span></p>
+            <!-- Outros campos conforme o backend -->
+        </div>
+
+        <div class="admin-form">
+            <textarea id="feedback" placeholder="Escreva um feedback..."></textarea>
+            <button onclick="enviarFeedback()">Enviar Feedback</button>
+            <button onclick="apagarDenuncia()">Apagar Denúncia</button>
+        </div>
+    </div>
+
+    <script src="denuncia.js"></script>
+</body>
+</html>

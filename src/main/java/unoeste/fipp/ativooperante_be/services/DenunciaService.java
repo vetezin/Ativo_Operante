@@ -19,7 +19,6 @@ public class DenunciaService {
     }
 
     public void deleteByTipoId(Long id){
-        
         denunciaRepository.deleteByTipoId(id);
     }
 

@@ -40,7 +40,6 @@ public class TipoService {
     public boolean deletar(Long id){
 
         if(tipoRepository.existsById(id)){
-
             denunciaRepository.deleteByTipoId(id);
             tipoRepository.deleteById(id);
              return true;

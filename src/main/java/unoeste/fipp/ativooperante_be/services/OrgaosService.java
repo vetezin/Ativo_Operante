@@ -44,7 +44,7 @@ public class OrgaosService {
     public boolean deletar( Long id){
 
         if(orgaosRepository.existsById(id)){
-            denunciaService.deleteByTipoId(id);
+//            denunciaService.deleteByTipoId(id);
             orgaosRepository.deleteById(id);
             return true;
 

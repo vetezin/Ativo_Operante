@@ -19,6 +19,7 @@ form.addEventListener('submit', (event) => {
         console.log('Senha vinda do backend:', `"${usuario.senha}"`);
 
         console.log("Usuário recebido:", usuario);
+        localStorage.setItem("idUsuario",usuario.id)
 
         if (usuario.senha == senha) {
             console.log("Acesso liberado");
@@ -26,8 +27,8 @@ form.addEventListener('submit', (event) => {
             if(usuario.email == "admin@admin.com"){
                 window.location.href = "admin.html";
             }
-            // else
-            //     window.location.href = "usuario.html"
+            else
+                window.location.href = "usuario.html";
 
             
         } else {

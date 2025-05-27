@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Área do Cidadão - Enviar Denúncia</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Área do Cidadão</h1>
+
+    <section>
+      <h2>Enviar Denúncia</h2>
+      <form id="denunciaForm">
+        <div class="input-group">
+          <label for="titulo">Título</label>
+          <input type="text" id="titulo" name="titulo" required />
+        </div>
+        <div class="input-group">
+          <label for="texto">Descrição</label>
+          <textarea id="texto" name="texto" required></textarea>
+        </div>
+        <div class="input-group">
+          <label for="urgencia">Urgência</label>
+          <select id="urgencia" name="urgencia" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="3">3- Baixa</option>
+            <option value="2">2 -Média</option>
+            <option value="1">1 -Alta</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="tipo">Tipo</label>
+          <select id="tipo" name="tipo" required>
+            <option value="" disabled selected>Selecione</option>
+            
+          </select>
+        </div>
+        <button type="submit" class="btn-submit">Enviar Denúncia</button>
+      </form>
+    </section>
+
+    <section class="denuncias-list" aria-label="Lista de denúncias enviadas">
+      <h2>Minhas Denúncias</h2>
+      <div id="listaDenuncias">
+        <!-- Lista dinâmica das denúncias e feedbacks -->
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Aqui você pode colocar JS para enviar a denúncia via fetch/AJAX e atualizar a lista
+  </script>
+</body>
+</html>

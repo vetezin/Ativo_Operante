@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
+
+
+
 let orgaosLista = []; // variável global para armazenar órgãos
 
 function carregarOrgaos() {
@@ -24,6 +28,72 @@ function carregarOrgaos() {
                 lista.appendChild(li);
             });
         });
+}
+
+
+function mostrarFormularioOrgao() {
+    const nomeOrgao = prompt("Nome do novo órgão:");
+
+    if (nomeOrgao && nomeOrgao.trim() !== "") {
+        const novoOrgao = {
+            nome: nomeOrgao.trim(),
+            
+        };
+
+        fetch('http://localhost:8080/apis/orgaos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(novoOrgao)
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error("Erro ao salvar novo órgão, verifique o nome.");
+            }
+            return res.json();
+        })
+        .then(() => {
+            alert("Órgão salvo com sucesso!");
+            carregarOrgaos(); // Atualiza a lista
+        })
+        .catch(err => {
+            alert("❌ " + err.message);
+            console.error(err);
+        });
+    } else {
+        alert("Nome inválido ou cancelado.");
+    }
+}
+
+function mostrarFormularioProblema(){
+
+    const nomeTipo = prompt("Nome do novo tipo: ");
+
+    if(nomeTipo != null && nomeTipo.trim()!= ""){
+        body = {
+            nome: nomeTipo.trim()
+        }
+         fetch('http://localhost:8080/apis/tipo',{
+            method:'POST',
+             headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+            
+         })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error("Erro ao salvar novo tipo, verifique o nome.");
+            }
+            return res.json();
+        })
+        .then(() => {
+            alert("Tipo salvo com sucesso!");
+            carregarTiposProblemas(); // Atualiza a lista
+        })
+    }
+
 }
 
 

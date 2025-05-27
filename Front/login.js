@@ -1,42 +1,41 @@
 const form = document.getElementById('loginForm');
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
 
-    const email = document.getElementById('email').value.trim();
-   const senha = document.getElementById('senha').value;
+  const email = document.getElementById('email').value.trim();
+  const senha = document.getElementById('senha').value;
 
-
-    fetch(`http://localhost:8080/apis/usuario?email=${encodeURIComponent(email)}`)
-    .then(async response => {
-        if (!response.ok) {
-            
-            const err = await response.json();
-            throw new Error(err.mensagem || "Usuário não encontrado");
-        }
-        return response.json();
-    })
-    .then(usuario => {
-        console.log('Senha vinda do backend:', `"${usuario.senha}"`);
-
-        console.log("Usuário recebido:", usuario);
-        localStorage.setItem("idUsuario",usuario.id)
-
-        if (usuario.senha == senha) {
-            console.log("Acesso liberado");
-
-            if(usuario.email == "admin@admin.com"){
-                window.location.href = "admin.html";
-            }
-            else
-                window.location.href = "usuario.html";
-
-            
-        } else {
-            throw new Error("Senha incorreta");
-        }
-    })
-    .catch(erro => {
-        console.error("Erro:", erro.message);
-        alert(erro.message);  
+  try {
+    const response = await fetch("http://localhost:8080/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, senha })
     });
+
+    if (!response.ok) {
+      const msg = await response.text();
+      throw new Error(msg || "Falha no login");
+    }
+
+    const data = await response.json();
+    console.log("🔐 Dados recebidos no login:", data);
+
+    // ✅ AJUSTE AQUI CONFORME A ESTRUTURA REAL DA RESPOSTA
+    localStorage.setItem("token", data.token);
+   localStorage.setItem("userId", data.id);
+    localStorage.setItem("role", data.role);
+
+    // Redirecionar com base no nível de acesso
+    if (data.role === "ADMIN" || data.role === "1") {
+      window.location.href = "admin.html";
+    } else {
+      window.location.href = "usuario.html";
+    }
+
+  } catch (error) {
+    console.error("Erro:", error.message);
+    alert("Erro no login: " + error.message);
+  }
 });

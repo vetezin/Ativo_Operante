@@ -32,7 +32,7 @@ public class UsuarioRestController {
     @GetMapping
     public ResponseEntity<Object> getUsuario(@RequestParam String email) {
 
-        Usuario usuario = usuarioService.getUser(email);
+        Usuario usuario = usuarioService.getUser(email.toLowerCase());
 
         if(usuario != null) {
             return ResponseEntity.ok(usuario);

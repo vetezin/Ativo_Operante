@@ -17,26 +17,38 @@
           <label for="titulo">Título</label>
           <input type="text" id="titulo" name="titulo" required />
         </div>
+
         <div class="input-group">
           <label for="texto">Descrição</label>
           <textarea id="texto" name="texto" required></textarea>
         </div>
+
         <div class="input-group">
           <label for="urgencia">Urgência</label>
           <select id="urgencia" name="urgencia" required>
             <option value="" disabled selected>Selecione</option>
-            <option value="3">3- Baixa</option>
-            <option value="2">2 -Média</option>
-            <option value="1">1 -Alta</option>
+            <option value="3">3 - Baixa</option>
+            <option value="2">2 - Média</option>
+            <option value="1">1 - Alta</option>
           </select>
         </div>
+
         <div class="input-group">
           <label for="tipo">Tipo</label>
           <select id="tipo" name="tipo" required>
             <option value="" disabled selected>Selecione</option>
-            
+            <!-- Preenchido dinamicamente -->
           </select>
         </div>
+
+        <div class="input-group">
+          <label for="orgao">Órgão</label>
+          <select id="orgao" name="orgao" required>
+            <option value="" disabled selected>Selecione</option>
+            <!-- Preenchido dinamicamente -->
+          </select>
+        </div>
+
         <button type="submit" class="btn-submit">Enviar Denúncia</button>
       </form>
     </section>
@@ -49,8 +61,6 @@
     </section>
   </div>
 
-  <script>
-    // Aqui você pode colocar JS para enviar a denúncia via fetch/AJAX e atualizar a lista
-  </script>
+  <script src="usuario.js"></script>
 </body>
 </html>

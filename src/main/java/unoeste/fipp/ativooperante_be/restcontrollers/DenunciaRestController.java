@@ -56,11 +56,10 @@ public class DenunciaRestController {
     public ResponseEntity<Object> getAllByUsuario(@PathVariable Long id){
         List<Denuncia> denunciaList;
         denunciaList=denunciaService.getAllByUsuario(id);
-        if (!denunciaList.isEmpty())
-            return ResponseEntity.ok(denunciaList);
-        else
-            return ResponseEntity.badRequest().body(
-                    new Erro("Nenhuma denuncia cadastrada para esse usuário"));
+
+        return ResponseEntity.ok(denunciaList);
+
+
     }
 
     @GetMapping("/{id}")

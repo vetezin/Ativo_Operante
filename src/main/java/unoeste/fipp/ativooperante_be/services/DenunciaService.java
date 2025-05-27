@@ -6,6 +6,7 @@ import unoeste.fipp.ativooperante_be.entities.Denuncia;
 import unoeste.fipp.ativooperante_be.entities.FeedBack;
 import unoeste.fipp.ativooperante_be.entities.Usuario;
 import unoeste.fipp.ativooperante_be.repositories.DenunciaRepository;
+import unoeste.fipp.ativooperante_be.repositories.UsuarioRepository;
 
 import java.util.List;
 
@@ -13,6 +14,9 @@ import java.util.List;
 public class DenunciaService {
     @Autowired
     private DenunciaRepository denunciaRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     public List<Denuncia> getAll()
     {
         return denunciaRepository.findAll();
@@ -33,7 +37,9 @@ public class DenunciaService {
     }
 
     public List<Denuncia> getAllByUsuario(Long id) {
-        return denunciaRepository.findAllByUsuario(new Usuario(id,0L));
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
+        if (usuario == null) return List.of();
+        return denunciaRepository.findAllByUsuario(usuario);
     }
 
     public Denuncia getDenunciaById(Long id) {
